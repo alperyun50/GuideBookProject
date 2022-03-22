@@ -89,7 +89,7 @@ namespace GuideBookProject.Controllers
 
 
         //[HttpGet("{Id:int}")]
-        //public async Task<IActionResult<Person>> Get_Person(int Id)
+        //public async Task<IActionResult<Person>> GetPerson(int Id)
         //{
 
         //}
@@ -141,14 +141,44 @@ namespace GuideBookProject.Controllers
         [HttpPost]
         public async Task<ActionResult<CommInfo>> AddCommInfo(CommInfo commInfo)
         {
+            try
+            {
+                if (commInfo == null)
+                {
+                    return BadRequest();
+                }
 
+                var commInfos = await _guideRepository.Add_CommInfo(commInfo);
+
+                return Ok(commInfos);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error creating new commInfo record!..");
+            }
         }
 
 
         [HttpDelete("{Id:int}")]
         public async Task<ActionResult> RemoveCommInfo(int Id)
         {
+            try
+            {
+                var commInfotoremove = await _guideRepository.Get_CommInfo(Id);
 
+                if (commInfotoremove == null)
+                {
+                    return NotFound();
+                }
+
+                await _guideRepository.Remove_CommInfo(Id);
+
+                return Ok($"CommInfo with User Id = {Id} removed");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error removing new CommInfo record!..");
+            }
         }
 
 
@@ -171,5 +201,12 @@ namespace GuideBookProject.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error retriewing data from the database!..");
             }
         }
+
+
+        //[HttpGet]
+        //public async Task<ActionResult<Person>> LocationReport()
+        //{
+
+        //}
     }
 }

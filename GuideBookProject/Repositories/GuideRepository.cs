@@ -16,7 +16,7 @@ namespace GuideBookProject.Repositories
         {
             _guideDbContext = guideDbContext;
         }
-        
+
 
         public async Task<Person> Add_Person(Person person)
         {
@@ -29,7 +29,7 @@ namespace GuideBookProject.Repositories
         {
             var result = await _guideDbContext.Persons.FirstOrDefaultAsync(e => e.UserID == userId);
 
-            if(result != null)
+            if (result != null)
             {
                 _guideDbContext.Persons.Remove(result);
                 await _guideDbContext.SaveChangesAsync();
@@ -60,7 +60,7 @@ namespace GuideBookProject.Repositories
         {
             var result = await _guideDbContext.Persons.FirstOrDefaultAsync(e => e.UserID == person.UserID);
 
-            if(result != null)
+            if (result != null)
             {
                 result.Name = person.Name;
                 result.Surname = person.Surname;
@@ -101,6 +101,9 @@ namespace GuideBookProject.Repositories
             return result;
         }
 
-        //public async Task<Person> Location_Report();
+        //public async Task<Person> Location_Report()
+        //{
+
+        //}
     }
 }
