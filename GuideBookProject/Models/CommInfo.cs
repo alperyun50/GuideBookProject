@@ -18,6 +18,9 @@ namespace GuideBookProject.Models
         [Column(TypeName = "VarChar(30)")]
         public string Location { get; set; }
 
+        [Column(TypeName = "VarChar(12)")]
+        public string TelNo { get; set; }
+
         public bool Status { get; set; }
 
         // FKey

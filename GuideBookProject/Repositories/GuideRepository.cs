@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace GuideBookProject.Repositories
 {
@@ -101,9 +102,26 @@ namespace GuideBookProject.Repositories
             return result;
         }
 
-        //public async Task<Person> Location_Report()
+        //public async Task<Person> Report(string location)
         //{
+        //    //var locationwithamount = _guideDbContext.CommInfos.OrderByDescending(x => x.Location).Count();
 
+        //    var locationwithamount2 = _guideDbContext.CommInfos.OrderByDescending(x => x.Location)
+        //        .GroupBy(x => x.Location)
+        //        .Select(Location => new { Location = Location.Key, LocationNumber = Location.Count() });
+
+        //    foreach(var locations in locationwithamount2)
+        //    {
+
+        //    }
+
+        //    var persons = _guideDbContext.CommInfos.Where(x => x.Location == location).Select(y => y.Person.UserID).Count();
+
+        //    var telnos = _guideDbContext.CommInfos.Where(x => x.Location == location).Select(y => y.TelNo).Count();
+
+
+
+            
         //}
     }
 }

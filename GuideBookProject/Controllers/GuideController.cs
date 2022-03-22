@@ -204,7 +204,7 @@ namespace GuideBookProject.Controllers
 
 
         //[HttpGet]
-        //public async Task<ActionResult<Person>> LocationReport()
+        //public async Task<ActionResult<Person>> Report()
         //{
 
         //}
