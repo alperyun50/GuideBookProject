@@ -21,7 +21,9 @@ namespace GuideBookProject.Models
         [Column(TypeName = "VarChar(20)")]
         public string Company { get; set; }
 
-        // one person can have many communication infos
+        // one person can has many communication infos
         ICollection<CommInfo> CommInfos { get; set; }
+
+        public bool Status { get; set; }
     }
 }
