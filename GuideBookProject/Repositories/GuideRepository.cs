@@ -45,10 +45,10 @@ namespace GuideBookProject.Repositories
             await _guideDbContext.SaveChangesAsync();
         }
 
-        //public async Task<Person> Get_Person(int userId)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public async Task<Person> Get_Person(int userId)
+        {
+            return await _guideDbContext.Persons.FirstOrDefaultAsync(x => x.UserID == userId);
+        }
 
         public async Task<IEnumerable<Person>> Get_Persons()
         {
@@ -78,14 +78,20 @@ namespace GuideBookProject.Repositories
 
 
 
-        public Task<CommInfo> Add_CommInfo(CommInfo commInfo)
+        public async Task<CommInfo> Add_CommInfo(CommInfo commInfo)
         {
-            throw new NotImplementedException();
+            var result = await _guideDbContext.CommInfos.AddAsync(commInfo);
+            await _guideDbContext.SaveChangesAsync();
+            return result.Entity;
         }
 
-        public Task Remove_CommInfo(int commInfoID)
+        public async Task Remove_CommInfo(int commInfoID)
         {
-            throw new NotImplementedException();
+            var result = await _guideDbContext.CommInfos.FindAsync(commInfoID);
+            result.Status = false;
+
+            _guideDbContext.CommInfos.Update(result);
+            await _guideDbContext.SaveChangesAsync();
         }
 
         public async Task<CommInfo> Get_CommInfo(int commInfoID)
@@ -94,5 +100,7 @@ namespace GuideBookProject.Repositories
 
             return result;
         }
+
+        //public async Task<Person> Location_Report();
     }
 }

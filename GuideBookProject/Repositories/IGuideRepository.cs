@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace GuideBookProject.Repositories
 {
-    interface IGuideRepository
+    public interface IGuideRepository
     {
         Task<Person> Add_Person(Person person);
 
         Task<Person> Update_Person(Person person);
 
-        //Task<Person> Get_Person(int userId);
+        Task<Person> Get_Person(int userId);
 
         Task<IEnumerable<Person>> Get_Persons();
 
@@ -27,6 +27,6 @@ namespace GuideBookProject.Repositories
 
         Task<CommInfo> Get_CommInfo(int commInfoID);
 
-        //Task<> Location_Report();
+        //Task<Person> Location_Report();
     }
 }
