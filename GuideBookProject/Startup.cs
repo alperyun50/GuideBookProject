@@ -1,4 +1,5 @@
 using GuideBookProject.Models;
+using GuideBookProject.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,10 +34,12 @@ namespace GuideBookProject
 
             services.AddControllers();
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "GuideBookProject", Version = "v1" });
-            });
+            services.AddScoped<IGuideRepository, GuideRepository>();
+
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "GuideBookProject", Version = "v1" });
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,8 +48,8 @@ namespace GuideBookProject
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GuideBookProject v1"));
+                //app.UseSwagger();
+                //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GuideBookProject v1"));
             }
 
             app.UseHttpsRedirection();
@@ -58,6 +61,11 @@ namespace GuideBookProject
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+
+                //endpoints.MapControllerRoute(
+                //    name: "default",
+                //    pattern: "{controller=Guide}/{action=GetPersons}/{id?}"
+                //);
             });
         }
     }

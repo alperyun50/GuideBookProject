@@ -21,7 +21,7 @@ namespace GuideBookProject.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost("AddPerson")]
         public async Task<ActionResult> AddPerson(Person person)
         {
             try
@@ -35,14 +35,14 @@ namespace GuideBookProject.Controllers
 
                 return Ok(persons);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error creating new person record!..");
             }
         }
 
 
-        [HttpDelete("{Id:int}")]
+        [HttpDelete("{Id:int}", Name = "DeletePerson")]
         public async Task<ActionResult> DeletePerson(int Id)
         {
             try
@@ -58,14 +58,14 @@ namespace GuideBookProject.Controllers
 
                 return Ok($"Person with User Id = {Id} deleted");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error deleting new person record!..");
             }
         }
 
 
-        [HttpDelete("{Id:int}")]
+        [HttpDelete("{Id:int}", Name = "RemovePerson")]
         public async Task<ActionResult> RemovePerson(int Id)
         {
             try
@@ -81,7 +81,7 @@ namespace GuideBookProject.Controllers
 
                 return Ok($"Person with User Id = {Id} removed");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error removing new person record!..");
             }
@@ -95,7 +95,7 @@ namespace GuideBookProject.Controllers
         //}
 
 
-        [HttpGet]
+        [HttpGet("GetPersons")]
         public async Task<ActionResult> GetPersons()
         {
             try
@@ -104,14 +104,14 @@ namespace GuideBookProject.Controllers
 
                 return Ok(persons);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error retriewing data from the database!..");
             }
         }
 
 
-        [HttpPut("{Id:int}")]
+        [HttpPut("{Id:int}", Name = "UpdatePerson")]
         public async Task<ActionResult<Person>> UpdatePerson(int Id, Person person)
         {
             try
@@ -131,14 +131,14 @@ namespace GuideBookProject.Controllers
                 return await _guideRepository.Update_Person(person);
 
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error updating new person record!..");
             }
         }
 
 
-        [HttpPost]
+        [HttpPost("AddCommInfo")]
         public async Task<ActionResult<CommInfo>> AddCommInfo(CommInfo commInfo)
         {
             try
@@ -152,14 +152,14 @@ namespace GuideBookProject.Controllers
 
                 return Ok(commInfos);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error creating new commInfo record!..");
             }
         }
 
 
-        [HttpDelete("{Id:int}")]
+        [HttpDelete("{Id:int}", Name = "RemoveCommInfo")]
         public async Task<ActionResult> RemoveCommInfo(int Id)
         {
             try
@@ -175,14 +175,14 @@ namespace GuideBookProject.Controllers
 
                 return Ok($"CommInfo with User Id = {Id} removed");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error removing new CommInfo record!..");
             }
         }
 
 
-        [HttpGet("{Id:int}")]
+        [HttpGet("{Id:int}", Name = "GetCommInfo")]
         public async Task<ActionResult<CommInfo>> GetCommInfo(int Id)
         {
             try 
@@ -196,17 +196,38 @@ namespace GuideBookProject.Controllers
 
                 return Ok(result);
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error retriewing data from the database!..");
             }
         }
 
 
-        //[HttpGet]
+        //[HttpGet(Name = "Report")]
         //public async Task<ActionResult<Person>> Report()
         //{
 
         //}
+
+
+        [HttpGet("Reportx")]
+        public async Task<ActionResult<List<Report>>> Reportx()
+        {
+            try
+            {
+                var result = await _guideRepository.Reportx();
+
+                if (result == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retriewing data from the database!..");
+            }
+        }
     }
 }

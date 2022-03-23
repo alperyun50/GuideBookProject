@@ -102,6 +102,7 @@ namespace GuideBookProject.Repositories
             return result;
         }
 
+
         //public async Task<Person> Report(string location)
         //{
         //    //var locationwithamount = _guideDbContext.CommInfos.OrderByDescending(x => x.Location).Count();
@@ -110,7 +111,7 @@ namespace GuideBookProject.Repositories
         //        .GroupBy(x => x.Location)
         //        .Select(Location => new { Location = Location.Key, LocationNumber = Location.Count() });
 
-        //    foreach(var locations in locationwithamount2)
+        //    foreach (var locations in locationwithamount2)
         //    {
 
         //    }
@@ -120,8 +121,35 @@ namespace GuideBookProject.Repositories
         //    var telnos = _guideDbContext.CommInfos.Where(x => x.Location == location).Select(y => y.TelNo).Count();
 
 
-
-            
         //}
+
+
+        public async  Task<List<Report>> Reportx()
+        {
+            List<Report> result = null;
+
+            try
+            {
+               result = await (
+                    from p in _guideDbContext.CommInfos
+                    group p by p.Location into g
+                    select new Report()
+                                    {
+                                      Location = g.Key,
+                                      LocationCount = g.Select(m => m.Location).Count(),
+                                      TelCount = g.Select(c => c.TelNo).Count(),
+                                      PersonCount=g.Select(l => l.UserID).Count()
+                                 }
+                        ).OrderByDescending(x => x.LocationCount).ToListAsync();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+                  
+            return result;
+
+        }
     }
 }
