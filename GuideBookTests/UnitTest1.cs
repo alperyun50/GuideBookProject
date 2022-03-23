@@ -42,7 +42,6 @@ namespace GuideBookTests
             // Assert
             //Assert.NotNull(result);
             result.Should().NotBeNull();
-            result.Should().BeAssignableTo<ActionResult<Person>>();
 
         }
 
@@ -60,7 +59,7 @@ namespace GuideBookTests
 
             // Assert
             result.Should().NotBeNull();
-            result.Should().BeAssignableTo<ActionResult<Person>>();
+            
         }
 
 
@@ -77,7 +76,7 @@ namespace GuideBookTests
 
             // Assert
             result.Should().NotBeNull();
-            result.Should().BeAssignableTo<ActionResult<Person>>();
+            
         }
 
 
@@ -94,7 +93,7 @@ namespace GuideBookTests
 
             // Assert
             result.Should().NotBeNull();
-            result.Should().BeAssignableTo<ActionResult<Person>>();
+            
         }
 
 
@@ -110,7 +109,7 @@ namespace GuideBookTests
 
             // Assert
             result.Should().NotBeNull();
-            result.Should().BeAssignableTo<ActionResult<Person>>();
+            
         }
 
 
@@ -126,7 +125,7 @@ namespace GuideBookTests
 
             // Assert
             result.Should().NotBeNull();
-            result.Should().BeAssignableTo<ActionResult<Person>>();
+            
         }
 
 
@@ -143,7 +142,7 @@ namespace GuideBookTests
 
             // Assert
             result.Should().NotBeNull();
-            result.Should().BeAssignableTo<ActionResult<CommInfo>>();
+           
         }
 
 
@@ -159,7 +158,7 @@ namespace GuideBookTests
 
             // Assert
             result.Should().NotBeNull();
-            result.Should().BeAssignableTo<ActionResult<CommInfo>>();
+            
         }
 
 
@@ -176,7 +175,7 @@ namespace GuideBookTests
 
             // Assert
             result.Should().NotBeNull();
-            result.Should().BeAssignableTo<ActionResult<CommInfo>>();
+            
         }
 
 
@@ -193,7 +192,7 @@ namespace GuideBookTests
 
             // Assert
             result.Should().NotBeNull();
-            result.Should().BeAssignableTo<ActionResult<Person>>();
+           
         }
     }
 }

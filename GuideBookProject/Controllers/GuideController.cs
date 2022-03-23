@@ -76,7 +76,7 @@ namespace GuideBookProject.Controllers
         }
 
 
-        [HttpGet("{Id:int}")]
+        [HttpGet("{Id:int}", Name = "GetPerson")]
         public async Task<ActionResult<Person>> GetPerson(int Id)
         {
             try
@@ -191,13 +191,6 @@ namespace GuideBookProject.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error retriewing data from the database!..");
             }
         }
-
-
-        //[HttpGet(Name = "Report")]
-        //public async Task<ActionResult<Person>> Report()
-        //{
-
-        //}
 
 
         [HttpGet("Reportx")]

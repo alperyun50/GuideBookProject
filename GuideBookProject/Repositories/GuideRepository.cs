@@ -22,14 +22,14 @@ namespace GuideBookProject.Repositories
         public async Task<Person> Add_Person(Person person)
         {
             var result = await _guideDbContext.Persons.AddAsync(person);
-            
+
             await _guideDbContext.SaveChangesAsync();
             return result.Entity;
         }
 
         public async Task Delete_Person(int userId)
         {
-            var result = await _guideDbContext.Persons.FirstOrDefaultAsync(e => e.UserID == userId);
+            var result = await _guideDbContext.Persons.Where(x => x.Status == true).FirstOrDefaultAsync(e => e.UserID == userId);
 
             if (result != null)
             {
@@ -40,7 +40,7 @@ namespace GuideBookProject.Repositories
 
         public async Task Remove_Person(int userId)
         {
-            var result = await _guideDbContext.Persons.FindAsync(userId);
+            var result = await _guideDbContext.Persons.Where(x => x.Status == true).FirstOrDefaultAsync(e => e.UserID == userId);
             result.Status = false;
 
             _guideDbContext.Persons.Update(result);
@@ -92,7 +92,7 @@ namespace GuideBookProject.Repositories
 
         public async Task Remove_CommInfo(int commInfoID)
         {
-            var result = await _guideDbContext.CommInfos.FindAsync(commInfoID);
+            var result = await _guideDbContext.CommInfos.Where(x => x.Status == true).FirstOrDefaultAsync(e => e.CommInfoID == commInfoID);
             result.Status = false;
 
             _guideDbContext.CommInfos.Update(result);
