@@ -27,8 +27,6 @@ namespace GuideBookProject.Repositories
 
         Task<CommInfo> Get_CommInfo(int commInfoID);
 
-        //Task<Person> Report();
-
         Task<List<Report>> Reportx();
     }
 }

@@ -22,7 +22,7 @@ namespace GuideBookProject.Controllers
 
 
         [HttpPost("AddPerson")]
-        public async Task<ActionResult> AddPerson(Person person)
+        public async Task<ActionResult<Person>> AddPerson(Person person)
         {
             try
             {
@@ -33,7 +33,9 @@ namespace GuideBookProject.Controllers
 
                 var persons = await _guideRepository.Add_Person(person);
 
-                return Ok(persons);
+                //return Ok(persons);
+                
+                return CreatedAtAction(nameof(GetPerson), new { id = persons.UserID }, persons);
             }
             catch (Exception)
             {
@@ -47,13 +49,6 @@ namespace GuideBookProject.Controllers
         {
             try
             {
-                var persontodelete = await _guideRepository.Get_Person(Id);
-
-                if (persontodelete == null)
-                {
-                    return NotFound();
-                }
-
                 await _guideRepository.Delete_Person(Id);
 
                 return Ok($"Person with User Id = {Id} deleted");
@@ -69,14 +64,7 @@ namespace GuideBookProject.Controllers
         public async Task<ActionResult> RemovePerson(int Id)
         {
             try
-            {
-                var persontoremove = await _guideRepository.Get_Person(Id);
-
-                if (persontoremove == null)
-                {
-                    return NotFound();
-                }
-
+            {           
                 await _guideRepository.Remove_Person(Id);
 
                 return Ok($"Person with User Id = {Id} removed");
@@ -88,15 +76,29 @@ namespace GuideBookProject.Controllers
         }
 
 
-        //[HttpGet("{Id:int}")]
-        //public async Task<IActionResult<Person>> GetPerson(int Id)
-        //{
+        [HttpGet("{Id:int}")]
+        public async Task<ActionResult<Person>> GetPerson(int Id)
+        {
+            try
+            {
+                var result = await _guideRepository.Get_Person(Id);
 
-        //}
+                if (result == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retriewing data from the database!..");
+            }
+        }
 
 
         [HttpGet("GetPersons")]
-        public async Task<ActionResult> GetPersons()
+        public async Task<ActionResult<IEnumerable<Person>>> GetPersons()
         {
             try
             {
@@ -111,24 +113,19 @@ namespace GuideBookProject.Controllers
         }
 
 
-        [HttpPut("{Id:int}", Name = "UpdatePerson")]
-        public async Task<ActionResult<Person>> UpdatePerson(int Id, Person person)
+        [HttpPut("UpdatePerson")]
+        public async Task<ActionResult<Person>> UpdatePerson(Person person)
         {
             try
             {
-                if(Id != person.UserID)
+                if (person == null)
                 {
-                    return BadRequest("");
+                    return BadRequest();
                 }
 
-                var persontoupdate = await _guideRepository.Get_Person(Id);
+                var result = await _guideRepository.Update_Person(person);
 
-                if(persontoupdate == null)
-                {
-                    return NotFound();
-                }
-
-                return await _guideRepository.Update_Person(person);
+                return Ok(result);
 
             }
             catch(Exception)
@@ -150,7 +147,7 @@ namespace GuideBookProject.Controllers
 
                 var commInfos = await _guideRepository.Add_CommInfo(commInfo);
 
-                return Ok(commInfos);
+                return CreatedAtAction(nameof(GetCommInfo), new { id = commInfos.CommInfoID }, commInfos);
             }
             catch (Exception)
             {
@@ -163,14 +160,7 @@ namespace GuideBookProject.Controllers
         public async Task<ActionResult> RemoveCommInfo(int Id)
         {
             try
-            {
-                var commInfotoremove = await _guideRepository.Get_CommInfo(Id);
-
-                if (commInfotoremove == null)
-                {
-                    return NotFound();
-                }
-
+            {              
                 await _guideRepository.Remove_CommInfo(Id);
 
                 return Ok($"CommInfo with User Id = {Id} removed");

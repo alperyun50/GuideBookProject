@@ -22,6 +22,7 @@ namespace GuideBookProject.Repositories
         public async Task<Person> Add_Person(Person person)
         {
             var result = await _guideDbContext.Persons.AddAsync(person);
+            
             await _guideDbContext.SaveChangesAsync();
             return result.Entity;
         }
@@ -48,18 +49,21 @@ namespace GuideBookProject.Repositories
 
         public async Task<Person> Get_Person(int userId)
         {
-            return await _guideDbContext.Persons.FirstOrDefaultAsync(x => x.UserID == userId);
+            var result = await _guideDbContext.Persons.Where(x => x.Status == true).FirstOrDefaultAsync(x => x.UserID == userId);
+
+            return result;
         }
 
         public async Task<IEnumerable<Person>> Get_Persons()
         {
-            // please check include method
-            return await _guideDbContext.Persons.ToListAsync();
+            var result = await _guideDbContext.Persons.Where(x => x.Status == true).ToListAsync();
+
+            return result;
         }
 
         public async Task<Person> Update_Person(Person person)
         {
-            var result = await _guideDbContext.Persons.FirstOrDefaultAsync(e => e.UserID == person.UserID);
+            var result = await _guideDbContext.Persons.Where(x => x.Status == true).FirstOrDefaultAsync(e => e.UserID == person.UserID);
 
             if (result != null)
             {
@@ -97,31 +101,10 @@ namespace GuideBookProject.Repositories
 
         public async Task<CommInfo> Get_CommInfo(int commInfoID)
         {
-            var result = await _guideDbContext.CommInfos.Include(x => x.Person).FirstOrDefaultAsync(x => x.CommInfoID == commInfoID);
+            var result = await _guideDbContext.CommInfos.Include(x => x.Person).Where(x => x.Status == true).FirstOrDefaultAsync(x => x.CommInfoID == commInfoID);
 
             return result;
         }
-
-
-        //public async Task<Person> Report(string location)
-        //{
-        //    //var locationwithamount = _guideDbContext.CommInfos.OrderByDescending(x => x.Location).Count();
-
-        //    var locationwithamount2 = _guideDbContext.CommInfos.OrderByDescending(x => x.Location)
-        //        .GroupBy(x => x.Location)
-        //        .Select(Location => new { Location = Location.Key, LocationNumber = Location.Count() });
-
-        //    foreach (var locations in locationwithamount2)
-        //    {
-
-        //    }
-
-        //    var persons = _guideDbContext.CommInfos.Where(x => x.Location == location).Select(y => y.Person.UserID).Count();
-
-        //    var telnos = _guideDbContext.CommInfos.Where(x => x.Location == location).Select(y => y.TelNo).Count();
-
-
-        //}
 
 
         public async  Task<List<Report>> Reportx()
@@ -131,16 +114,16 @@ namespace GuideBookProject.Repositories
             try
             {
                result = await (
-                    from p in _guideDbContext.CommInfos
-                    group p by p.Location into g
-                    select new Report()
+                             from p in _guideDbContext.CommInfos
+                             group p by p.Location into g
+                                   select new Report()
                                     {
                                       Location = g.Key,
                                       LocationCount = g.Select(m => m.Location).Count(),
                                       TelCount = g.Select(c => c.TelNo).Count(),
                                       PersonCount=g.Select(l => l.UserID).Count()
-                                 }
-                        ).OrderByDescending(x => x.LocationCount).ToListAsync();
+                                    }
+                              ).OrderByDescending(x => x.LocationCount).ToListAsync();
 
             }
             catch (Exception)
