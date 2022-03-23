@@ -10,12 +10,12 @@ Not: First of all you have to add your actual connection string to appsettings.j
 HTTP Request/Response FeedBacks:
 
 * **POST**   : api/Guide/AddPerson  ---> Adding person to guidebook
-* **DELETE** : api/Guide/DeletePerson/{id}  ---> Deleting person to guidebook
-* **DELETE** : api/Guide/RemovePerson/{id}  ---> Removing person to guidebook with id
+* **DELETE** : api/Guide/DeletePerson/{id}  ---> Deleting person from guidebook with id
+* **DELETE** : api/Guide/RemovePerson/{id}  ---> Removing person from guidebook with id
 * **GET**    : api/Guide/GetPerson/{id}  ---> Getting one person from guidebook with id
 * **GET**    : api/Guide/GetPersons  ---> Getting all persons from guidebook
-* **PUT**    : api/Guide/UpdatePerson  ---> Adding person to guidebook
-* **POST**   : api/Guide/AddCommInfo  ---> Adding communication info to guidebook
-* **DELETE** : api/Guide/RemoveCommInfo/{id}  ---> Removing communication info from guidebook with id
-* **GET**    : api/Guide/GetCommInfo/{id}  ---> Getting one communication info from guidebook with id
+* **PUT**    : api/Guide/UpdatePerson  ---> Updating person in guidebook
+* **POST**   : api/Guide/AddCommInfo  ---> Adding person communication info to guidebook
+* **DELETE** : api/Guide/RemoveCommInfo/{id}  ---> Removing person communication info from guidebook with id
+* **GET**    : api/Guide/GetCommInfo/{id}  ---> Getting one person communication info from guidebook with id
 * **GET**    : api/Guide/Reportx  ---> Getting report info from guidebook
