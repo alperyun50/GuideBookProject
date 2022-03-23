@@ -78,10 +78,15 @@ namespace GuideBookProject.Migrations
             modelBuilder.Entity("GuideBookProject.Models.CommInfo", b =>
                 {
                     b.HasOne("GuideBookProject.Models.Person", "Person")
-                        .WithMany()
+                        .WithMany("CommInfos")
                         .HasForeignKey("PersonUserID");
 
                     b.Navigation("Person");
+                });
+
+            modelBuilder.Entity("GuideBookProject.Models.Person", b =>
+                {
+                    b.Navigation("CommInfos");
                 });
 #pragma warning restore 612, 618
         }

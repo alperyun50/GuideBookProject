@@ -76,7 +76,7 @@ namespace GuideBookProject.Controllers
         }
 
 
-        [HttpGet("{Id:int}", Name = "GetPerson")]
+        [HttpGet("{Id}", Name ="GetPerson")]
         public async Task<ActionResult<Person>> GetPerson(int Id)
         {
             try

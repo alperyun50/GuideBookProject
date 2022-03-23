@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GuideBookProject.Migrations
 {
     [DbContext(typeof(GuideDbContext))]
-    [Migration("20220322175658_CommInfoModified")]
-    partial class CommInfoModified
+    [Migration("20220323235407_InitGuideBookDb")]
+    partial class InitGuideBookDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -80,10 +80,15 @@ namespace GuideBookProject.Migrations
             modelBuilder.Entity("GuideBookProject.Models.CommInfo", b =>
                 {
                     b.HasOne("GuideBookProject.Models.Person", "Person")
-                        .WithMany()
+                        .WithMany("CommInfos")
                         .HasForeignKey("PersonUserID");
 
                     b.Navigation("Person");
+                });
+
+            modelBuilder.Entity("GuideBookProject.Models.Person", b =>
+                {
+                    b.Navigation("CommInfos");
                 });
 #pragma warning restore 612, 618
         }

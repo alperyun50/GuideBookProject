@@ -22,7 +22,7 @@ namespace GuideBookProject.Models
         public string Company { get; set; }
 
         // one person can has many communication infos
-        ICollection<CommInfo> CommInfos { get; set; }
+        public ICollection<CommInfo> CommInfos { get; set; }
 
         public bool Status { get; set; }
     }

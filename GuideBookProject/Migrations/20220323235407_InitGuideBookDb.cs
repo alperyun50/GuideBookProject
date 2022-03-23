@@ -2,7 +2,7 @@
 
 namespace GuideBookProject.Migrations
 {
-    public partial class InitiateGuideDB : Migration
+    public partial class InitGuideBookDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,6 +30,7 @@ namespace GuideBookProject.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Email = table.Column<string>(type: "VarChar(40)", nullable: true),
                     Location = table.Column<string>(type: "VarChar(30)", nullable: true),
+                    TelNo = table.Column<string>(type: "VarChar(12)", nullable: true),
                     Status = table.Column<bool>(type: "bit", nullable: false),
                     UserID = table.Column<int>(type: "int", nullable: false),
                     PersonUserID = table.Column<int>(type: "int", nullable: true)
