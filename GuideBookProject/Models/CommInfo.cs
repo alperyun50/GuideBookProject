@@ -21,11 +21,11 @@ namespace GuideBookProject.Models
         [Column(TypeName = "VarChar(12)")]
         public string TelNo { get; set; }
 
-        public bool Status { get; set; }
-
         // FKey
-        public int UserID { get; set; }
+        public int PersonID { get; set; }
 
         public Person Person { get; set; }
+
+        public bool Status { get; set; }
     }
 }

@@ -146,7 +146,7 @@ namespace GuideBookProject.Repositories
                                       Location = g.Key,
                                       LocationCount = g.Select(m => m.Location).Count(),
                                       TelCount = g.Select(c => c.TelNo).Count(),
-                                      PersonCount=g.Select(l => l.UserID).Count()
+                                      PersonCount=g.Select(l => l.PersonID).Count()
                                     }
                               ).OrderByDescending(x => x.LocationCount).ToListAsync();
 

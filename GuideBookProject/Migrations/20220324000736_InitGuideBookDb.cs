@@ -31,25 +31,24 @@ namespace GuideBookProject.Migrations
                     Email = table.Column<string>(type: "VarChar(40)", nullable: true),
                     Location = table.Column<string>(type: "VarChar(30)", nullable: true),
                     TelNo = table.Column<string>(type: "VarChar(12)", nullable: true),
-                    Status = table.Column<bool>(type: "bit", nullable: false),
-                    UserID = table.Column<int>(type: "int", nullable: false),
-                    PersonUserID = table.Column<int>(type: "int", nullable: true)
+                    PersonID = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CommInfos", x => x.CommInfoID);
                     table.ForeignKey(
-                        name: "FK_CommInfos_Persons_PersonUserID",
-                        column: x => x.PersonUserID,
+                        name: "FK_CommInfos_Persons_PersonID",
+                        column: x => x.PersonID,
                         principalTable: "Persons",
                         principalColumn: "UserID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CommInfos_PersonUserID",
+                name: "IX_CommInfos_PersonID",
                 table: "CommInfos",
-                column: "PersonUserID");
+                column: "PersonID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
