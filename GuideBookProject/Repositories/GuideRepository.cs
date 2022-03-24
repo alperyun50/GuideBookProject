@@ -103,30 +103,20 @@ namespace GuideBookProject.Repositories
         {
             var result = await _guideDbContext.CommInfos.Include(x => x.Person).Where(x => x.Status == true).FirstOrDefaultAsync(x => x.CommInfoID == commInfoID);
 
+            //var result = await _guideDbContext.Persons.Include(y => y.CommInfos).Where(x => x.Status == true && x.UserID == commInfoID).ToListAsync();
 
+            //var result = await _guideDbContext.Persons.Where(x => x.Status == true)
+            //        .Select(b => new Person
+            //        {
+            //            UserID = b.UserID,
+            //            Name = b.Name,
+            //            Surname = b.Surname,
+            //            Company = b.Company,
+            //            CommInfos = b.CommInfos
+            //                      .Select(s =>
+            //                      new CommInfo { CommInfoID = s.CommInfoID, Email = s.Email, Location = s.Location, TelNo = s.TelNo, Status = s.Status }).ToList()
 
-          //  things = _context.Things.OrderBy(b => b.Name)
-          //        .Select(b => new ThingViewModel
-          //           {
-          //               Id = b.Id,
-          //               Name = b.Name,
-          //               SubThings = b.SubThings.Select(st => new SubThingViewModel { Id = st.Id, ...}).ToList()
-          //           }).ToList();
-
-
-          //var result = await _guideDbContext.Persons
-          //        .Select(b => new Person
-          //        {
-          //            UserID = b.UserID,
-          //            Name = b.Name,
-          //            Surname = b.Surname,
-          //            Company = b.Company,
-          //            Status = b.Status,
-          //            CommInfos = b.CommInfos.Select(s => new CommInfo { CommInfoID = s.CommInfoID,  })
-
-          //        }).ToList();
-
-
+            //        }).FirstOrDefaultAsync(x => x.UserID == commInfoID);
 
             return result;
         }

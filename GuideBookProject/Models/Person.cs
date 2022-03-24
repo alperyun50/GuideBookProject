@@ -24,6 +24,6 @@ namespace GuideBookProject.Models
         // one person can has many communication infos
         public ICollection<CommInfo> CommInfos { get; set; }
 
-        public bool Status { get; set; }
+        public bool Status { get; set; } = true;
     }
 }

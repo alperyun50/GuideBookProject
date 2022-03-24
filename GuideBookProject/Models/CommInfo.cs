@@ -26,6 +26,6 @@ namespace GuideBookProject.Models
 
         public Person Person { get; set; }
 
-        public bool Status { get; set; }
+        public bool Status { get; set; } = true;
     }
 }
