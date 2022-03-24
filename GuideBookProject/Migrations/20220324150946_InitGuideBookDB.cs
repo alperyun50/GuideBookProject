@@ -2,7 +2,7 @@
 
 namespace GuideBookProject.Migrations
 {
-    public partial class InitGuideBookDb : Migration
+    public partial class InitGuideBookDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

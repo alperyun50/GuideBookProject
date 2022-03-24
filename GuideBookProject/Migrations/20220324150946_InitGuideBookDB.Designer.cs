@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GuideBookProject.Migrations
 {
     [DbContext(typeof(GuideDbContext))]
-    [Migration("20220324000736_InitGuideBookDb")]
-    partial class InitGuideBookDb
+    [Migration("20220324150946_InitGuideBookDB")]
+    partial class InitGuideBookDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
