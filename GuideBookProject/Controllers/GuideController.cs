@@ -136,7 +136,7 @@ namespace GuideBookProject.Controllers
 
 
         [HttpPost("AddCommInfo")]
-        public async Task<ActionResult<CommInfo>> AddCommInfo(CommInfo commInfo)
+        public async Task<ActionResult<CommInfo>> AddCommInfo(CommInfoDTO commInfo)
         {
             try
             {
@@ -147,13 +147,16 @@ namespace GuideBookProject.Controllers
 
                 var commInfos = await _guideRepository.Add_CommInfo(commInfo);
 
-                return CreatedAtAction(nameof(GetCommInfo), new { id = commInfos.CommInfoID }, commInfos);
+                //return CreatedAtAction(nameof(GetCommInfo), new { id = commInfos.CommInfoID }, commInfos);
+
+                return Ok(commInfos);
             }
             catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error creating new commInfo record!..");
             }
         }
+
 
 
         [HttpDelete("{Id:int}", Name = "RemoveCommInfo")]

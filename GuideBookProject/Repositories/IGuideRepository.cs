@@ -21,11 +21,15 @@ namespace GuideBookProject.Repositories
         Task Remove_Person(int userId);
 
 
-        Task<CommInfo> Add_CommInfo(CommInfo commInfo);
+        //Task<CommInfo> Add_CommInfo(CommInfo commInfo);
+
+        Task<List<CommInfo>> Add_CommInfo(CommInfoDTO commInfoDto);
 
         Task Remove_CommInfo(int commInfoID);
 
-        Task<CommInfo> Get_CommInfo(int commInfoID);
+        //Task<CommInfo> Get_CommInfo(int commInfoID);
+
+        Task<List<CommInfo>> Get_CommInfo(int commInfoID);
 
         Task<List<Report>> Reportx();
     }

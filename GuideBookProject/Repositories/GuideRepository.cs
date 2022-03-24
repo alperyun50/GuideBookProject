@@ -83,42 +83,46 @@ namespace GuideBookProject.Repositories
 
 
 
-        public async Task<CommInfo> Add_CommInfo(CommInfo commInfo)
+        public async Task<List<CommInfo>> Add_CommInfo(CommInfoDTO commInfoDto)
         {
-            var result = await _guideDbContext.CommInfos.AddAsync(commInfo);
+            var person = await _guideDbContext.Persons.FindAsync(commInfoDto.PersonID);
+
+            var newCommInfo = new CommInfo
+            {
+                Email = commInfoDto.Email,
+                Location = commInfoDto.Location,
+                TelNo = commInfoDto.TelNo,
+                Status = commInfoDto.Status,
+                Person = person
+            };
+
+            _guideDbContext.CommInfos.Add(newCommInfo);
             await _guideDbContext.SaveChangesAsync();
-            return result.Entity;
+
+            return await Get_CommInfo(newCommInfo.PersonID);
         }
+
 
         public async Task Remove_CommInfo(int commInfoID)
         {
             var result = await _guideDbContext.CommInfos.Where(x => x.Status == true).FirstOrDefaultAsync(e => e.CommInfoID == commInfoID);
-            result.Status = false;
 
-            _guideDbContext.CommInfos.Update(result);
-            await _guideDbContext.SaveChangesAsync();
+           if(result != null)
+            { 
+                result.Status = false;
+
+                _guideDbContext.CommInfos.Update(result);
+                await _guideDbContext.SaveChangesAsync();
+            }
         }
 
-        public async Task<CommInfo> Get_CommInfo(int commInfoID)
+       
+
+        public async Task<List<CommInfo>> Get_CommInfo(int commInfoID)
         {
-            var result = await _guideDbContext.CommInfos.Include(x => x.Person).Where(x => x.Status == true).FirstOrDefaultAsync(x => x.CommInfoID == commInfoID);
+            var results = await _guideDbContext.CommInfos.Where(x => x.PersonID == commInfoID && x.Status == true).ToListAsync();
 
-            //var result = await _guideDbContext.Persons.Include(y => y.CommInfos).Where(x => x.Status == true && x.UserID == commInfoID).ToListAsync();
-
-            //var result = await _guideDbContext.Persons.Where(x => x.Status == true)
-            //        .Select(b => new Person
-            //        {
-            //            UserID = b.UserID,
-            //            Name = b.Name,
-            //            Surname = b.Surname,
-            //            Company = b.Company,
-            //            CommInfos = b.CommInfos
-            //                      .Select(s =>
-            //                      new CommInfo { CommInfoID = s.CommInfoID, Email = s.Email, Location = s.Location, TelNo = s.TelNo, Status = s.Status }).ToList()
-
-            //        }).FirstOrDefaultAsync(x => x.UserID == commInfoID);
-
-            return result;
+            return results;
         }
 
 

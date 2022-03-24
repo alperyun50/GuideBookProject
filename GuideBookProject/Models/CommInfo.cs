@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace GuideBookProject.Models
@@ -24,6 +25,7 @@ namespace GuideBookProject.Models
         // FKey
         public int PersonID { get; set; }
 
+        [JsonIgnore]
         public Person Person { get; set; }
 
         public bool Status { get; set; } = true;
